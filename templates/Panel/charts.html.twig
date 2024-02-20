@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} &ndash; Charts{% endblock %}
+
+{% block body %}
+<div id="stockCharts" class="container-fluid py-3">
+    <ul class="nav nav-pills" id="period-tabs" role="tablist">
+        <li class="nav-item"><a class="nav-link px-2 py-1 active" data-period="1d" role="tab" data-bs-toggle="tab">1d</a></li>
+        <li class="nav-item"><a class="nav-link px-2 py-1" data-period="5d" role="tab" data-bs-toggle="tab">5d</a></li>
+        <li class="nav-item"><a class="nav-link px-2 py-1" data-period="1mo" role="tab" data-bs-toggle="tab">1m</a></li>
+        <li class="nav-item"><a class="nav-link px-2 py-1" data-period="6mo" role="tab" data-bs-toggle="tab">6m</a></li>
+        <li class="nav-item"><a class="nav-link px-2 py-1" data-period="ytd" role="tab" data-bs-toggle="tab">ytd</a></li>
+        <li class="nav-item"><a class="nav-link px-2 py-1" data-period="1y" role="tab" data-bs-toggle="tab">1y</a></li>
+        <li class="nav-item"><a class="nav-link px-2 py-1" data-period="5y" role="tab" data-bs-toggle="tab">5y</a></li>
+        <li class="nav-item"><a class="nav-link px-2 py-1" data-period="max" role="tab" data-bs-toggle="tab">max</a></li>
+    </ul>
+
+    <div class="charts row mt-2 g-2">
+        {% for stock in stocks %}{% if stock.displayChart %}
+            <div class="col col-md-6 col-xl-4 col-xxl-3 box-chart">
+                <div class="box-inner">
+                    <div class="d-flex mb-1">
+                        <h3 class="flex-fill"><a href="http://finance.yahoo.com/q?s={{ stock.symbol }}" rel="external">{{ stock.name }}</a></h3>
+                        {% if stock.profit is not null %}
+                            <div class="profit text-end {% if stock.profit < 0 %}down{% elseif stock.profit > 0 %}up{% endif %}">
+                                <div>{{ stock.profitPercent|sonata_number_format_percent({'fraction_digits': 2}, {'positive_prefix': '+'}) }}</div>
+                                <div class="isPrivate">{{ stock.profit|sonata_number_format_currency(stock.currency, {}, {'positive_prefix': '+'}) }}</div>
+                            </div>
+                        {% endif %}
+                        {% if stock.currentChange is not null %}
+                            <div class="profit text-end {% if stock.currentChange < 0 %}down{% elseif stock.currentChange > 0 %}up{% endif %}">
+                                <div><span class="indicator"></span>{{ stock.currentChangePercent|sonata_number_format_percent({'fraction_digits': 2}, {'positive_prefix': '+'}) }}</div>
+                                <div class="isPrivate">{{ stock.currentChange|sonata_number_format_currency(stock.currency, {}, {'positive_prefix': '+'}) }}</div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="chart" id="chart-{{ stock.id }}" data-stock-id="{{ stock.id }}"></div>
+                </div>
+            </div>
+        {% endif %}{% endfor %}
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} &ndash; Tabellen{% endblock %}
+
+{% block body %}
+    <div id="stockTable" class="container-lg py-3">
+        {% include "Panel/tableContent.html.twig" %}
+    </div>
+{% endblock %}
