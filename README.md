@@ -22,7 +22,3 @@ Installation
 4) Install Yarn dependencies: `yarn install`
 5) Build production assets: `yarn build`
 
-License
--------
-This software is available under the [MIT license](LICENSE).
-
