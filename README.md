@@ -1,4 +1,4 @@
-stock-panel-symfony
+Symfony6-REST-API
 =================
 
 I've written this Symfony application to keep track of my stock portfolio.
