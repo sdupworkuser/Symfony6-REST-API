@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Services\Consumer;
+namespace AppBundle\Services;
 
 use AppBundle\Entity\ConsumerProfile;
 use AppBundle\Entity\User;
