@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Services\Calendar;
+namespace AppBundle\Services;
 
 use AppBundle\Entity\Branch;
 use AppBundle\Entity\Calendar;
@@ -22,7 +22,7 @@ use AppBundle\Entity\ReviewAggregationToken\GoogleToken;
 
 /**
  * Class GoogleCalendarService
- * @package AppBundle\Services\Calendar
+ * @package AppBundle\Services
  */
 class GoogleCalendarService 
 {
